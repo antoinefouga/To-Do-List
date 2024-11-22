@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function ToDoList() {
   const [tasks, setTasks] = useState([""]);
   const [newTask, setNewTask] = useState("");
+  const [draggedItemIndex, setDraggedItemIndex] = useState(null);
 
   const handleChange = (event) => {
     setNewTask(event.target.value);
@@ -20,25 +21,19 @@ export default function ToDoList() {
     setTasks(updatedTasks);
   };
 
-  const moveTaskUp = (index) => {
-    if (index > 0) {
-      const updatedTasks = [...tasks];
-      [updatedTasks[index], updatedTasks[index - 1]] = [
-        updatedTasks[index - 1],
-        updatedTasks[index],
-      ];
-      setTasks(updatedTasks);
-    }
+  const handleDragStart = (index) => {
+    setDraggedItemIndex(index);
   };
-  const moveTaskDown = (index) => {
-    if (index < tasks.length - 1) {
-      const updatedTasks = [...tasks];
-      [updatedTasks[index], updatedTasks[index + 1]] = [
-        updatedTasks[index + 1],
-        updatedTasks[index],
-      ];
-      setTasks(updatedTasks);
-    }
+
+  const handleDragEnd = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (index) => {
+    const updatedTasks = [...tasks];
+    const draggedItem = updatedTasks.splice(draggedItemIndex, 1)[0];
+    updatedTasks.splice(index, 0, draggedItem);
+    setTasks(updatedTasks);
   };
 
   return (
@@ -59,7 +54,13 @@ export default function ToDoList() {
 
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>
+          <li
+            key={index}
+            draggable
+            onDragStart={() => handleDragStart(index)}
+            onDragOver={handleDragEnd}
+            onDrop={() => handleDrop(index)}
+          >
             <p className="text">{task}</p>
             <button
               className="delete-button"
@@ -67,20 +68,6 @@ export default function ToDoList() {
               onClick={() => deleteTask(index)}
             >
               Supprimer
-            </button>
-            <button
-              className="move-button"
-              type="button"
-              onClick={() => moveTaskUp(index)}
-            >
-              Haut
-            </button>
-            <button
-              className="move-button"
-              type="button"
-              onClick={() => moveTaskDown(index)}
-            >
-              Bas
             </button>
           </li>
         ))}
