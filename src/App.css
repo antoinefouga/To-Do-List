@@ -1,42 +1,88 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: black;
+}
+
+.to-do-list {
+  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  margin-top: 10rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+  font-size: 4rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* button part */
+
+button {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5 ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.add-button {
+  background-color: rgb(41, 121, 41);
+}
+.add-button:hover {
+  background-color: rgb(53, 150, 53);
 }
 
-.card {
-  padding: 2em;
+.delete-button {
+  background-color: rgb(189, 8, 8);
+}
+.delete-button:hover {
+  background-color: rgb(212, 11, 11);
 }
 
-.read-the-docs {
-  color: #888;
+.move-button {
+  background-color: rgb(47, 8, 189);
+}
+.move-button:hover {
+  background-color: rgb(58, 11, 231);
+}
+
+.delete-button,
+.move-button {
+  padding: 8px;
+  font-size: 1.4rem;
+  margin-left: 10px;
+}
+
+/**************************/
+
+input[type="text"] {
+  font-size: 1.6rem;
+  padding: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.432);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.384);
+}
+
+li {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 16px;
+  background-color: rgb(240, 238, 238);
+  margin-bottom: 10px;
+  border: 2px solid rgba(161, 159, 159, 0.37);
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.text {
+  flex: 1;
 }
